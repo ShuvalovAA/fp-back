@@ -1,0 +1,50 @@
+[tool.poetry]
+packages = [{include = "fb_back", from = "src"}]
+name = "fb-back"
+version = "0.1.0"
+description = "Finance Planner backend section"
+authors = ["Artemy Shuvalov <shuvalovartal@yandex.ru>"]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<4.0"
+django = ">=5.0,<6.0"
+django-stubs = "^6.0.7"
+mypy = "^2.3.0"
+pydantic = "^2.13.4"
+djangorestframework = "^3.18.0"
+drf-spectacular = {extras = ["pydantic"], version = "^0.30.0"}
+ruff = "^0.16.3"
+
+[tool.poetry.group.dev.dependencies]
+#django-stubs = {extras = ["compatible-mypy"], version = "^6.0.7"}
+pyright = "^1.1.411"
+django-autotyping = "^0.5.1"
+pylint = "^4.0.6"
+flake8-pyproject = "^1.2.4"
+djangorestframework-stubs = "^3.18.1"
+
+[tool.mypy]
+mypy_path = ["src"]
+plugins = ["mypy_django_plugin.main"]
+exclude = ["**/*.pyi", "**/*models.py"]
+
+[tool.pylint.main]
+disable = [
+    "C0116",
+    "C0115",
+    "C0114"
+]
+ignore-patterns = [".*\\.pyi"]
+
+[tool.pyright]
+include = ["src", "."]
+pythonVersion = "3.12"
+typeCheckingMode = "strict"
+exclude = ["**/*.pyi", "*models.py"]
+
+[tool.django-stubs]
+django_settings_module = "fp_back.settings"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
